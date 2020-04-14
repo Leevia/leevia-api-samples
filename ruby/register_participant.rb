@@ -34,6 +34,8 @@ participant = {
   custom_data: {
     date_of_birth: '1989-10-03'
   },
+  # uncommend the line below and replace YOUR_PATH with the file you want to upload
+  # file_field: File.new('YOUR_PATH'),
   acceptances: {
     rules: true,
     newsletter: false
