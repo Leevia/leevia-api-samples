@@ -4,8 +4,8 @@ require 'json'
 require 'rest-client'
 
 CAMPAIGN_ID = 999 # TODO: replace 999 with your campaign id
-KEY = 'xxx' # TODO: replace xxx with your api key
-SECRET = 'yyy' # TODO: replace yyy with your api secret
+API_KEY = 'xxx' # TODO: replace xxx with your api key
+API_SECRET = 'yyy' # TODO: replace yyy with your api secret
 END_POINT = 'https://app.leevia.com/api/v1/campaigns'
 
 ### Get authorization JWT token ###
@@ -15,10 +15,10 @@ uri = URI(
 request = Net::HTTP::Get.new(uri)
 request['Accept'] = 'application/vnd.leevia.api.v1+json'
 request['Content-Type'] = 'application/json'
-request['App-Key'] = KEY
+request['App-Key'] = API_KEY
 timestamp = Time.now
 request['Timestamp'] = timestamp
-request['Signature'] = OpenSSL::HMAC.hexdigest('sha256', SECRET, "#{KEY}.#{timestamp}")
+request['Signature'] = OpenSSL::HMAC.hexdigest('sha256', API_SECRET, "#{API_KEY}.#{timestamp}")
 result = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
   http.request(request)
 end
