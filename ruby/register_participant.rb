@@ -3,9 +3,9 @@ require 'openssl'
 require 'json'
 require 'rest-client'
 
-CAMPAIGN_ID = 1
-KEY = 'xxx'
-SECRET = 'yyy'
+CAMPAIGN_ID = 999 # TODO: replace 999 with your campaign id
+KEY = 'xxx' # TODO: replace xxx with your api key
+SECRET = 'yyy' # TODO: replace yyy with your api secret
 END_POINT = 'https://app.leevia.com/api/v1/campaigns'
 
 ### Get authorization JWT token ###
