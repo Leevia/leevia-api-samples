@@ -12,6 +12,7 @@ END_POINT = 'https://app.leevia.com/api/v1/campaigns'
 uri = URI(
   [END_POINT, CAMPAIGN_ID, 'authenticate'].join('/')
 )
+puts uri
 request = Net::HTTP::Get.new(uri)
 request['Accept'] = 'application/vnd.leevia.api.v1+json'
 request['Content-Type'] = 'application/json'

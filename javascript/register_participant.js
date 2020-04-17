@@ -1,21 +1,36 @@
-https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js
+var CryptoJS = require("crypto-js");
+const https = require('https');
+var fs = require('fs');
 
 var CAMPAIGN_ID = 999 // TODO: replace 999 with your campaign id
 var API_KEY = 'xxx'; // TODO: replace xxx with your api key
 var API_SECRET = 'yyy'; // TODO: replace yyy with your api secret
-var END_POINT = "http://app.lvh.me:3000/" + CAMPAIGN_ID + "/authenticate";
+var HOST = "app.leevia.com";
 
-timestamp = + new Date();
+timestamp = new Date();
 message = API_KEY + "." + timestamp;
 signature = CryptoJS.HmacSHA256(message, API_SECRET).toString(CryptoJS.enc.Hex);
 
-var request = new XMLHttpRequest();
-request.open("GET", END_POINT, false);
-request.setRequestHeader('Accept', 'application/vnd.leevia.api.v1+json');
-request.setRequestHeader('Content-Type', 'application/json');
-request.setRequestHeader('App-Key', API_KEY);
-request.setRequestHeader('Timestamp', timestamp);
-request.setRequestHeader('Signature', signature);
-request.send(null);
+const options = {
+  hostname: HOST,
+  path: '/api/v1/campaigns/' + CAMPAIGN_ID + '/authenticate',
+  method: 'GET',
+  headers: {
+    'Accept': 'application/vnd.leevia.api.v1+json',
+    'Content-Type': 'application/json',
+    'App-Key': API_KEY,
+    'Timestamp': timestamp,
+    'Signature': signature
+  }
+};
 
-console.log(request.getResponseHeader("authorization"));
+const req = https.request(options, (res) => {
+  console.log(`STATUS: ${res.statusCode}`);
+  console.log(`HEADERS: ${res.headers['authorization']}`);
+});
+
+req.on('error', (e) => {
+  console.error(`problem with request: ${e.message}`);
+});
+
+req.end();
