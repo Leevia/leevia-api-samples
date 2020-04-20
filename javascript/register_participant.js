@@ -46,6 +46,8 @@ function do_participant_request(authorization) {
     custom_data: {
       date_of_birth: '1989-10-03'
     },
+    // uncomment the line below and replace YOUR_PATH with the file you want to upload
+    // file_field: fs.readFileSync('YOUR_PATH'),
     acceptances: {
       rules: true,
       newsletter: false
