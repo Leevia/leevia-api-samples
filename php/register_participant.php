@@ -44,20 +44,22 @@
 
   curl_close($ch);
 
-  $participant = NULL;
+  $participant = new \stdClass();
   $participant->first_name = "Mario";
   $participant->last_name = "Rossi";
-  $participant->email = "mario.rossi.20@example.come";
+  $participant->email = "mario.rossi@example.come";
   $participant->registration_ip = "192.168.0.4";
 
-  $custom_data = NULL;
+  $custom_data = new \stdClass();
   $custom_data->date_of_birth = '1989-10-03';
   $participant->custom_data = $custom_data;
 
-  $acceptances = NULL;
+  $acceptances = new \stdClass();
   $acceptances->rules = true;
   $acceptances->newsletter = false;
   $participant->acceptances = $acceptances;
+  // uncomment the line below and replace YOUR_PATH with the file you want to upload
+  //$participant->file_field = json_encode(file('YOUR_PATH'));
 
   $participant_json = json_encode($participant);
 
